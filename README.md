@@ -97,7 +97,7 @@ Cette application est fournie à titre informatif uniquement. Elle ne remplace p
 
 ## Auteur
 
-Souad [Ton Nom Complet]  
+Souad ABOUD & Abderrazak NADIR 
 Master IT / Projet Deep Learning  
 Université Mohammed V - Rabat  
 
