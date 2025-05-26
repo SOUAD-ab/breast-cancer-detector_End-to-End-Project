@@ -32,10 +32,9 @@ L’objectif est de fournir un outil d’aide au diagnostic rapide et accessible
    ```
 
 2. Créer un environnement virtuel (optionnel mais recommandé) :
-   ```bash
-   python -m venv venv
-   source venv/bin/activate   # Sur Windows : venv\Scripts\activate
-   ```
+
+conda create -n breast-cancer-detector python=3.10
+conda activate breast-cancer-detector
 
 3. Installer les dépendances :
    ```bash
@@ -72,13 +71,27 @@ Ouvre ensuite l’URL affichée dans ton navigateur pour accéder à l’interfa
 
 ## Résultats et performances
 
-| Classe    | Précision | Rappel | F1-score | Support |
-|-----------|-----------|--------|----------|---------|
-| Bénin     | 0.93      | 0.91   | 0.92     | 179     |
-| Malin     | 0.79      | 0.90   | 0.84     | 84      |
-| Normal    | 0.96      | 0.81   | 0.88     | 53      |
-| **Exactitude globale** |           |        | **0.89**     | 316     |
+✅ Rapport de classification (jeu de test strict)
 
+Classe	Précision	Rappel	F1-score	Support
+Bénin	0.94	0.93	0.94	179
+Malin	0.84	0.90	0.87	84
+Normal	0.96	0.91	0.93	53
+Exactitude globale			0.92	316
+
+🧪 Résultats globaux sur l’ensemble de test complet
+Accuracy globale : 91%
+
+Loss : 0.2368
+
+📊 Matrice de confusion brute :
+
+lua
+Copier
+Modifier
+[[840  44   7]
+ [ 52 364   5]
+ [ 28  10 228]]
 ---
 
 ## Limites connues
@@ -98,6 +111,7 @@ Cette application est fournie à titre informatif uniquement. Elle ne remplace p
 ## Auteur
 
 Souad ABOUD & Abderrazak NADIR 
+Enadré et Supervisé par Pr. Abdelhak MAHMOUDI
 Master IT / Projet Deep Learning  
 Université Mohammed V - Rabat  
 
