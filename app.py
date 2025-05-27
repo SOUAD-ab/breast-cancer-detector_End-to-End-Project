@@ -142,6 +142,10 @@ def main():
                 # Correction minimale ici pour éviter label vide
                 status = class_names.get(pred_class, "Normal")
 
+                # ===> Mise à jour à faire ici si besoin <===
+                # Par exemple, ajuster la confiance, ajouter un log, modifier les recommandations, etc.
+                # donc faire cette mise ajou ici
+
                 st.markdown('<div class="result-card">', unsafe_allow_html=True)
                 status_config = {
                     "Bénin": {"color": "#28a745", "icon": "🟢"},
