@@ -109,13 +109,15 @@ def main():
 
     st.markdown("**Outil d'aide au diagnostic**\nChargez une image échographique pour obtenir une analyse automatisée.")
 
-   st.markdown('<div class="upload-section">', unsafe_allow_html=True)
+    # ========= SECTION CORRIGÉE =========
+    st.markdown('<div class="upload-section">', unsafe_allow_html=True)
     uploaded_file = st.file_uploader(
-        "Téléverser une image échographique",  # Label explicite
+        "Téléverser une image échographique",
         type=["jpg", "jpeg", "png"],
-        label_visibility="collapsed"  # Masqué visuellement
+        label_visibility="collapsed"
     )
     st.markdown('</div>', unsafe_allow_html=True)
+    # ====================================
 
     if uploaded_file is not None:
         model = load_model()
@@ -142,13 +144,7 @@ def main():
                 
                 pred_class = np.argmax(prediction)
                 confidence = float(np.max(prediction)) * 100
-                
-                # Correction minimale ici pour éviter label vide
                 status = class_names.get(pred_class, "Normal")
-
-                # ===> Mise à jour à faire ici si besoin <===
-                # Par exemple, ajuster la confiance, ajouter un log, modifier les recommandations, etc.
-                # donc faire cette mise ajou ici
 
                 st.markdown('<div class="result-card">', unsafe_allow_html=True)
                 status_config = {
@@ -168,9 +164,7 @@ def main():
                 """, unsafe_allow_html=True)
 
                 st.markdown(f'<div class="confidence-bar" style="width: {confidence:.0f}%;"></div>', unsafe_allow_html=True)
-
                 display_recommendations(status)
-
                 st.markdown('</div>', unsafe_allow_html=True)
 
                 # 📊 Graphique des probabilités
