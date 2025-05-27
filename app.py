@@ -138,7 +138,9 @@ def main():
                 
                 pred_class = np.argmax(prediction)
                 confidence = float(np.max(prediction)) * 100
-                status = class_names[pred_class]
+                
+                # Correction minimale ici pour éviter label vide
+                status = class_names.get(pred_class, "Normal")
 
                 st.markdown('<div class="result-card">', unsafe_allow_html=True)
                 status_config = {
