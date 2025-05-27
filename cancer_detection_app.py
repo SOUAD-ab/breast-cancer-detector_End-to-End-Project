@@ -6,6 +6,9 @@ import numpy as np
 import tensorflow as tf
 import matplotlib.pyplot as plt
 
+st.title("Détection de Cancer du Sein 🎗️")
+st.write("L'application fonctionne !")
+
 # 🎨 Configuration de la page
 st.set_page_config(
     page_title="Détection de Cancer du Sein",
