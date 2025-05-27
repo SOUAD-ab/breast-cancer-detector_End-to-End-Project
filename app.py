@@ -74,7 +74,7 @@ set_bg_image("images/illustration_fond.jpg")
 st.image("images/logo_um5.png", width=150)
 
 # 📁 Chargement du modèle fine-tuné (cache pour optimiser les rechargements)
-MODEL_PATH = "C:/Users/Souad.ABOUD/Documents/LAB/breast-cancer-detector_End-to-End-Project/models/fine_tuned_model.keras"
+MODEL_PATH = "models/fine_tuned_model.keras"
 class_names = {0: "Bénin", 1: "Malin", 2: "Normal"}
 
 @st.cache_resource(show_spinner=False)
