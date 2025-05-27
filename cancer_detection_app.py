@@ -16,6 +16,8 @@ st.set_page_config(
 
 # 🔄 Fonction pour encoder une image en Base64 (pour le fond)
 def get_base64_of_bin_file(bin_file):
+    if not os.path.exists(bin_file):
+        return None
     with open(bin_file, 'rb') as f:
         data = f.read()
     return base64.b64encode(data).decode()
@@ -23,6 +25,8 @@ def get_base64_of_bin_file(bin_file):
 # 🎨 Appliquer un fond personnalisé
 def set_bg_image(png_path):
     bin_str = get_base64_of_bin_file(png_path)
+    if bin_str is None:
+        return  # fichier non trouvé, on ne met pas de fond
     st.markdown(f'''
         <style>
         .stApp {{
@@ -67,11 +71,12 @@ def set_bg_image(png_path):
         </style>
     ''', unsafe_allow_html=True)
 
-# Appliquer le fond (assure-toi que ce chemin est correct)
+# Appliquer le fond (vérifie que le chemin est correct)
 set_bg_image("images/illustration_fond.jpg")
 
-# Afficher le logo (assure-toi que ce chemin est correct)
-st.image("images/logo_um5.png", width=150)
+# Afficher le logo (vérifie le chemin)
+if os.path.exists("images/logo_um5.png"):
+    st.image("images/logo_um5.png", width=150)
 
 # 📁 Chargement du modèle fine-tuné (cache pour optimiser les rechargements)
 MODEL_PATH = "C:/Users/Souad.ABOUD/Documents/LAB/breast-cancer-detector_End-to-End-Project/models/fine_tuned_model.keras"
@@ -110,7 +115,11 @@ def main():
     st.markdown("**Outil d'aide au diagnostic**\nChargez une image échographique pour obtenir une analyse automatisée.")
 
     st.markdown('<div class="upload-section">', unsafe_allow_html=True)
-    uploaded_file = st.file_uploader("", type=["jpg", "jpeg", "png"], label_visibility="collapsed")
+    uploaded_file = st.file_uploader(
+        label="Chargez une image échographique (jpg, jpeg, png)",
+        type=["jpg", "jpeg", "png"],
+        label_visibility="visible"
+    )
     st.markdown('</div>', unsafe_allow_html=True)
 
     if uploaded_file is not None:
@@ -138,13 +147,14 @@ def main():
                 
                 pred_class = np.argmax(prediction)
                 confidence = float(np.max(prediction)) * 100
-                status = class_names[pred_class]
+                status = class_names.get(pred_class, "Inconnu")
 
                 st.markdown('<div class="result-card">', unsafe_allow_html=True)
                 status_config = {
                     "Bénin": {"color": "#28a745", "icon": "🟢"},
                     "Malin": {"color": "#dc3545", "icon": "🔴"},
-                    "Normal": {"color": "#17a2b8", "icon": "🔵"}
+                    "Normal": {"color": "#17a2b8", "icon": "🔵"},
+                    "Inconnu": {"color": "#6c757d", "icon": "❓"}
                 }
 
                 st.markdown(f"""
@@ -181,7 +191,7 @@ def main():
                 # 🧾 Détail texte brut
                 st.markdown("### Détails des prédictions :")
                 for i, p in enumerate(prediction[0]):
-                    st.write(f"→ {class_names[i]} : {p * 100:.2f}%")
+                    st.write(f"→ {class_names.get(i, 'Inconnu')} : {p * 100:.2f}%")
 
             except Exception as e:
                 st.error(f"Erreur lors de l'analyse : {str(e)}")
