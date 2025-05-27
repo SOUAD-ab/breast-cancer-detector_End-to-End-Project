@@ -110,8 +110,11 @@ def main():
     st.markdown("**Outil d'aide au diagnostic**\nChargez une image échographique pour obtenir une analyse automatisée.")
 
     st.markdown('<div class="upload-section">', unsafe_allow_html=True)
-    uploaded_file = st.file_uploader("", type=["jpg", "jpeg", "png"], label_visibility="collapsed")
-    st.markdown('</div>', unsafe_allow_html=True)
+uploaded_file = st.file_uploader(
+    "Téléverser une image échographique",  # Label explicite
+    type=["jpg", "jpeg", "png"],
+    label_visibility="collapsed"  # Masqué visuellement
+)    st.markdown('</div>', unsafe_allow_html=True)
 
     if uploaded_file is not None:
         model = load_model()
