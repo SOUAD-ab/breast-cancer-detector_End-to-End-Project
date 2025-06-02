@@ -80,7 +80,7 @@ class_names = {0: "Bénin", 1: "Malin", 2: "Normal"}
 @st.cache_resource(show_spinner=False)
 def load_model():
     try:
-        model = tf.keras.models.load_model(MODEL_PATH)
+        model = tf.keras.models.load_model(MODEL_PATH, compile=False)
         return model
     except Exception as e:
         st.error(f"Erreur de chargement du modèle : {e}")
