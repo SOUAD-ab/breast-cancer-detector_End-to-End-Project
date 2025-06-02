@@ -116,6 +116,9 @@ Master IT / Projet Deep Learning
 Université Mohammed V - Rabat  
 
 ---
+## Lien Web :
+
+https://zbw2e3vr5fnrpj6pv3yqdr.streamlit.app/
 
 ## Licence
 
